@@ -16,34 +16,7 @@ public class Interaction : MonoBehaviour {
 
     void Update()
     {
-            RaycastHit hit;
-            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward, Color.green);
-			if (Physics.Raycast(ray, out hit, 3) && hit.collider.tag == "Interactable")
-            {
-                InteractText.enabled = true;
-
-            if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Item>().isInteractableAgain == true)
-            {
-                hit.collider.GetComponent<Item>().OnInteract();
-
-
-                if (hit.collider.GetComponent<Item>().OnInteractText() != "" && talking == false)
-                    StartCoroutine(TypewriterEffect(hit.collider.GetComponent<Item>().OnInteractText(), ThinkText));
-            }
-            else if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Item>().isInteractableAgain == false && talking == false)
-                StartCoroutine(TypewriterEffect(cantInteract, ThinkText));
-
-            if (Input.GetKeyDown(KeyCode.I) && talking == false)
-                {
-                    StartCoroutine(TypewriterEffect(hit.collider.GetComponent<Item>().OnThink(), ThinkText));
-                    Debug.Log("Started!");
-                }
-    }
-            else
-            {
-                InteractText.enabled = false;
-            }
+        RaycastInteract();
     }
 
     public IEnumerator TypewriterEffect(string text, TextMeshProUGUI tText)
@@ -61,5 +34,37 @@ public class Interaction : MonoBehaviour {
         tText.enabled = false;
         talking = false;
         StopCoroutine(TypewriterEffect(text, tText));
+    }
+
+    public void RaycastInteract()
+    {
+            RaycastHit hit;
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward, Color.green);
+
+			if (Physics.Raycast(ray, out hit, 3) && hit.collider.tag == "Interactable")
+            {
+                InteractText.enabled = true;
+
+                if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Item>().isInteractableAgain == true && talking == false) // can't interact with objects while talking, might come up with better solution later
+                {
+                    hit.collider.GetComponent<Item>().OnInteract();
+
+                    if (hit.collider.GetComponent<Item>().OnInteractText() != "" && talking == false)
+                        StartCoroutine(TypewriterEffect(hit.collider.GetComponent<Item>().OnInteractText(), ThinkText));
+                }
+                else if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Item>().isInteractableAgain == false && talking == false)
+                    StartCoroutine(TypewriterEffect(cantInteract, ThinkText));
+
+                if (Input.GetKeyDown(KeyCode.I) && talking == false)
+                    {
+                        StartCoroutine(TypewriterEffect(hit.collider.GetComponent<Item>().OnThink(), ThinkText));
+                        Debug.Log("Started!");
+                    }
+            }
+            else
+            {
+                InteractText.enabled = false;
+            }
     }
 }

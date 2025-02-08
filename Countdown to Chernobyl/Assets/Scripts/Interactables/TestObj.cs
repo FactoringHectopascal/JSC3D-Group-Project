@@ -6,23 +6,21 @@ public class TestObj : Item
 {
     public TestObj()
     {
-        easyThought = "Wow! This is a Test Object that is used for testing!";
-        mediumThought = "This is an object I haven't seen before, I wonder if it has a use here?";
-        hardThought = "What even is this thing?";
+        easyThought = "This square looks awfully interactable, I wonder if it has to do with that door?";
+        mediumThought = "I wonder if I can use this square for something? Actually, isn't it a cube?";
+        hardThought = "Hmm.. A cube?";
         objName = "Interesting Cube";
-        playerIntTextEasy = "Did this thing just destroy that square?";
-        PlayerIntTextMedium = "I feel like there's less shade here now.";
-        PlayerIntTextHard = "What just happened?";
+        playerIntTextEasy = "Yes! I got that door unlocked!";
+        PlayerIntTextMedium = "I think I just unlocked something.";
+        PlayerIntTextHard = "I think I heard something click.";
     }
 
     public override void OnInteract()
     {
-        Debug.Log("Fine! If you want me to unlock that door so bad, then I will!");
         isInteractableAgain = false;
-        GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().doorUnlocked = true;
-        easyThought = "Oh sweet! Thanks for opening the door!";
-        mediumThought = "That was a door?";
-        hardThought = "Did this cube just say something?";
+        GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().testDoorLock = false;
+        easyThought = "It seems like I got that door open!";
+        mediumThought = "I think it unlocked something.";
+        hardThought = "Was this a part of a mechanism?";
     }
-
 }
