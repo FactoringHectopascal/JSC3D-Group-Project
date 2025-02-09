@@ -1,43 +1,29 @@
-using TMPro;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item
 {
+    public Sprite icon;
+    public string name;
+    public string description;
+    public bool isConsumable;
 
-    public string easyThought;
-    public string mediumThought;
-    public string hardThought;
-    public string objName;
-    public string playerIntTextEasy;
-    public string PlayerIntTextMedium;
-    public string PlayerIntTextHard;
-    public bool isInteractableAgain = true;
-
-    public virtual void OnInteract()
+    public Sprite GetIcon()
     {
-
+        return icon;
     }
 
-    public virtual string OnThink()
+    public string GetName()
     {
-        if (GameObject.FindGameObjectWithTag("Difficulty Handler").GetComponent<DifficultyHandler>().difficulty == 1)
-            return easyThought;
-        if (GameObject.FindGameObjectWithTag("Difficulty Handler").GetComponent<DifficultyHandler>().difficulty == 2)
-            return mediumThought;
-        if (GameObject.FindGameObjectWithTag("Difficulty Handler").GetComponent<DifficultyHandler>().difficulty == 3)
-            return hardThought;
-        else return null;
+        return name;
     }
 
-    public virtual string OnInteractText()
+    public string GetDesc()
     {
-        if (GameObject.FindGameObjectWithTag("Difficulty Handler").GetComponent<DifficultyHandler>().difficulty == 1)
-            return playerIntTextEasy;
-        if (GameObject.FindGameObjectWithTag("Difficulty Handler").GetComponent<DifficultyHandler>().difficulty == 2)
-            return PlayerIntTextMedium;
-        if (GameObject.FindGameObjectWithTag("Difficulty Handler").GetComponent<DifficultyHandler>().difficulty == 3)
-            return PlayerIntTextHard;
-        else return null;
+        return description;
+    }
+
+    public bool CheckConsumable()
+    {
+        return isConsumable;
     }
 }
-

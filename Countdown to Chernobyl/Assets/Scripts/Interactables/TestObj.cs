@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class TestObj : Item
+public class TestObj : Object
 {
     public TestObj()
     {
@@ -10,17 +10,17 @@ public class TestObj : Item
         mediumThought = "I wonder if I can use this square for something? Actually, isn't it a cube?";
         hardThought = "Hmm.. A cube?";
         objName = "Interesting Cube";
-        playerIntTextEasy = "Yes! I got that door unlocked!";
-        PlayerIntTextMedium = "I think I just unlocked something.";
-        PlayerIntTextHard = "I think I heard something click.";
+        playerIntTextEasy = "Did this even do anything?";
+        PlayerIntTextMedium = "Was this originally supposed to unlock something?";
+        PlayerIntTextHard = "Why is this here?";
     }
 
     public override void OnInteract()
     {
         isInteractableAgain = false;
         GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().testDoorLock = false;
-        easyThought = "It seems like I got that door open!";
-        mediumThought = "I think it unlocked something.";
-        hardThought = "Was this a part of a mechanism?";
+        easyThought = "Was this pointless?";
+        mediumThought = "Absurd.";
+        hardThought = "Stupid cube! Arghhh.. I'm so upset with you!";
     }
 }

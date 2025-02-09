@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 public class Interaction : MonoBehaviour {
 
     [SerializeField]
@@ -19,21 +17,21 @@ public class Interaction : MonoBehaviour {
         RaycastInteract();
     }
 
-    public IEnumerator TypewriterEffect(string text, TextMeshProUGUI tText)
+    public IEnumerator TypewriterEffect(string text)
     {
         talking = true;
-        tText.enabled = true;
+        ThinkText.enabled = true;
 
         foreach(char c in text)
         {
-            tText.text = tText.text + c;
+            ThinkText.text += c;
             yield return new WaitForSeconds(.03f);
         }
-        yield return new WaitForSeconds(3);
-        tText.text = "";
-        tText.enabled = false;
+        yield return new WaitForSeconds(1.3f);
+        ThinkText.text = "";
+        ThinkText.enabled = false;
         talking = false;
-        StopCoroutine(TypewriterEffect(text, tText));
+        StopCoroutine(TypewriterEffect(text));
     }
 
     public void RaycastInteract()
@@ -46,20 +44,19 @@ public class Interaction : MonoBehaviour {
             {
                 InteractText.enabled = true;
 
-                if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Item>().isInteractableAgain == true && talking == false) // can't interact with objects while talking, might come up with better solution later
+                if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Object>().isInteractableAgain == true && talking == false) // can't interact with objects while talking, might come up with better solution later
                 {
-                    hit.collider.GetComponent<Item>().OnInteract();
+                    hit.collider.GetComponent<Object>().OnInteract();
 
-                    if (hit.collider.GetComponent<Item>().OnInteractText() != "" && talking == false)
-                        StartCoroutine(TypewriterEffect(hit.collider.GetComponent<Item>().OnInteractText(), ThinkText));
+                    if (hit.collider.GetComponent<Object>().OnInteractText() != "" && talking == false)
+                        StartCoroutine(TypewriterEffect(hit.collider.GetComponent<Object>().OnInteractText()));
                 }
-                else if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Item>().isInteractableAgain == false && talking == false)
-                    StartCoroutine(TypewriterEffect(cantInteract, ThinkText));
+                else if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Object>().isInteractableAgain == false && talking == false)
+                    StartCoroutine(TypewriterEffect(cantInteract));
 
                 if (Input.GetKeyDown(KeyCode.I) && talking == false)
                     {
-                        StartCoroutine(TypewriterEffect(hit.collider.GetComponent<Item>().OnThink(), ThinkText));
-                        Debug.Log("Started!");
+                        StartCoroutine(TypewriterEffect(hit.collider.GetComponent<Object>().OnThink()));
                     }
             }
             else

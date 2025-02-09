@@ -1,36 +1,38 @@
 using UnityEngine;
 
-public class Door : Item
+public class Door : Object
 {
     public Door()
     {
-        easyThought = "Huh, a door. I think I need to interact with a square to get rid of it.";
-        mediumThought = "A door. It doesn't seem to have a doorknob.";
+        easyThought = "Huh, a door. I think this needs a key. The doorknob is shaped like a capsule..";
+        mediumThought = "A door. I think it needs some sort of key.";
         hardThought = "Just a door.";
         objName = "Test Door";
-        playerIntTextEasy = "No dice. I think I need to interact with a square.";
-        PlayerIntTextMedium = "Where do I even get started opening this? There's no knob!";
+        playerIntTextEasy = "Still a door, shocking. I need that capsule key!";
+        PlayerIntTextMedium = "Still a door, still in need of a key. Don't worry!";
         PlayerIntTextHard = "Still a door, still locked.";
     }
 
     public override void OnInteract()
     {
-        if(GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().testDoorLock == false)
+        if(GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GetItem("Test Key") != null)
         {
-            playerIntTextEasy = "Nice! I got it open!";
-            PlayerIntTextMedium = "So that's how a door without a knob works.";
-            PlayerIntTextHard = "Interesting mechanism.";
+            Item item = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GetItem("Test Key");
+            playerIntTextEasy = "Easy!";
+            PlayerIntTextMedium = "How did I unlock it using a key when there's no knob?";
+            PlayerIntTextHard = "There it goes.";
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().RemoveItem(item);
             Destroy(gameObject);
         }
     }
 
     void Update()
     {
-        if(GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().testDoorLock == false)
+        if(GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GetItem("Test Key") != null)
         {
-            easyThought = "This should be unlocked now!";
-            mediumThought = "I think I can interact with this now.";
-            hardThought = "Was this a part of the cube's mechanism?";
+            easyThought = "I think I can use that key I found here.";
+            mediumThought = "I might be able to unlock this now.";
+            hardThought = "Does this key go here?";
         }
     }
 }
