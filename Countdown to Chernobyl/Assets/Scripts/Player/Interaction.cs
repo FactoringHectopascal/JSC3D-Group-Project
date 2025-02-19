@@ -40,7 +40,7 @@ public class Interaction : MonoBehaviour {
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward, Color.green);
 
-			if (Physics.Raycast(ray, out hit, 3) && hit.collider.tag == "Interactable")
+			if (Physics.Raycast(ray, out hit, 3) && hit.collider.tag == "Interactable" && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().usingThing == false)
             {
                 InteractText.enabled = true;
 

@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Item
+public class Item : MonoBehaviour
 {
+    [SerializeField]
     public Sprite icon;
-    public string name;
+    public string itemName;
     public string description;
     public bool isConsumable;
 
@@ -14,7 +16,7 @@ public class Item
 
     public string GetName()
     {
-        return name;
+        return itemName;
     }
 
     public string GetDesc()
