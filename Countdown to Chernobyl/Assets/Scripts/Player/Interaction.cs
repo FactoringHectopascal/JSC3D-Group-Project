@@ -7,7 +7,7 @@ public class Interaction : MonoBehaviour {
     TextMeshProUGUI InteractText;
     [SerializeField]
     public TextMeshProUGUI ThinkText;
-    bool talking;
+    public bool talking;
     string cantInteract = "No point in touching this anymore.";
 
     // it repeats the same text if the player interacts with something twice, may need to implement second dialogue function for multiple interaction
@@ -44,14 +44,14 @@ public class Interaction : MonoBehaviour {
             {
                 InteractText.enabled = true;
 
-                if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Object>().isInteractableAgain == true && talking == false) // can't interact with objects while talking, might come up with better solution later
-                {
-                    hit.collider.GetComponent<Object>().OnInteract();
+            if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Object>().isInteractableAgain == true && talking == false) // can't interact with objects while talking, might come up with better solution later
+            {
+                hit.collider.GetComponent<Object>().OnInteract();
 
-                    if (hit.collider.GetComponent<Object>().OnInteractText() != "" && talking == false)
-                        StartCoroutine(TypewriterEffect(hit.collider.GetComponent<Object>().OnInteractText()));
-                }
-                else if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Object>().isInteractableAgain == false && talking == false)
+                if (hit.collider.GetComponent<Object>().repeatDialogue == true && hit.collider.GetComponent<Object>().OnInteractText() != "" && talking == false)
+                    StartCoroutine(TypewriterEffect(hit.collider.GetComponent<Object>().OnInteractText()));
+            }
+            else if (Input.GetKeyDown(KeyCode.E) && hit.collider.GetComponent<Object>().isInteractableAgain == false && talking == false)
                     StartCoroutine(TypewriterEffect(cantInteract));
 
                 if (Input.GetKeyDown(KeyCode.I) && talking == false)
