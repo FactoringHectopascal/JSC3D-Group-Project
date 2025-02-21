@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -15,6 +17,8 @@ public class Slot : MonoBehaviour
     bool disabled;
     GameObject eH;
     EventHandler eventH;
+    [SerializeField]
+    UnityEngine.UI.Image imageSelection;
 
     private void Start()
     {
@@ -30,11 +34,26 @@ public class Slot : MonoBehaviour
     {
         OpenSlots();
         PopulateSlot();
+        if(inventory.equippedItem == null && inventory.itemToCombine == null)
+            imageSelection.enabled = false;
     }
 
     public void EquipItem() // for the button
     {
-        inventory.EquipItem(item);
+        if (inventory.equippedItem == null)
+        {
+            inventory.EquipItem(item);
+            Debug.Log($"Selected item: {item.GetName()}");
+            imageSelection.enabled = true;
+            item.OnEquip();
+        }
+        else if (inventory.equippedItem != item && inventory.itemToCombine != item)
+        {
+            inventory.SelectItem(item);
+            Debug.Log($"Selected item to combine: {item.GetName()}");
+            imageSelection.enabled = true;
+            item.OnEquip();
+        }
     }
 
     public void OpenSlots()
@@ -51,6 +70,7 @@ public class Slot : MonoBehaviour
         {
             image.enabled = false;
             button.enabled = false;
+            inventory.ClearItems();
             ResetCursor();
         }
     }
@@ -101,6 +121,7 @@ public class Slot : MonoBehaviour
             disabled = true;
         }
     }
+
 }
 
 

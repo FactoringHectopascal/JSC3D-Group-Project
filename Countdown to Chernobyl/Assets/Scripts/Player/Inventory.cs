@@ -4,8 +4,8 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
 
-    Item equippedItem;
-    Item itemToCombine;
+    public Item equippedItem;
+    public Item itemToCombine;
 
     public List<Item> items = new List<Item>();
 
@@ -43,21 +43,49 @@ public class Inventory : MonoBehaviour
 
     public void CombineItems()
     {
-        if(equippedItem.CheckCombinable())
+        if (equippedItem != null && equippedItem.CheckCombinable() && itemToCombine != null)
         {
             if (itemToCombine.GetName() == equippedItem.ItemNeeded())
             {
                 AddItem(equippedItem.ItemResult());
+                equippedItem.ItemResult().OnCombine();
                 RemoveItem(itemToCombine);
                 RemoveItem(equippedItem);
             }
-            else Debug.Log("You can't combine this!");
+            else
+            {
+                Debug.Log("You can't combine these!");
+                ClearItems();
+            }
         }
-        else Debug.Log("This item can't be used for combination!");
+        else
+        {
+            Debug.Log("Can't combine like this!");
+            ClearItems();
+        }
+    }
+
+    public void ClearItems()
+    {
+        equippedItem = null;
+        itemToCombine = null;
     }
 
     public void EquipItem(Item item)
     {
-        item = equippedItem;
+        equippedItem = item;
+    }
+
+    public void SelectItem(Item item)
+    {
+        itemToCombine = item;
+    }
+
+    private void Update()
+    {
+        if (!items.Contains(equippedItem))
+            equippedItem = null;
+        if (!items.Contains(itemToCombine))
+            itemToCombine = null;
     }
 }

@@ -25,4 +25,10 @@ public class EventHandler : MonoBehaviour
             isOpen = false;
         
     }
+
+    private void Start()
+    {
+        isOpen = false;
+        usingThing = false;
+    }
 }

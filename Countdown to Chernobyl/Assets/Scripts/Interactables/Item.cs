@@ -46,4 +46,14 @@ public class Item
     {
         return itemToGive;
     }
+
+    public virtual void OnEquip()
+    {
+
+    }
+    
+    public virtual void OnCombine()
+    {
+
+    }
 }

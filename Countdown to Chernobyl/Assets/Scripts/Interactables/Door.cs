@@ -15,7 +15,7 @@ public class Door : Object
 
     public override void OnInteract()
     {
-        if(GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GetItem("Test Key") != null)
+        if(GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().equippedItem != null && GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().equippedItem.GetName() == "Test Key")
         {
             Item item = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GetItem("Test Key");
             playerIntTextEasy = "Easy!";
