@@ -10,11 +10,19 @@ public class EventHandler : MonoBehaviour
     public bool screen3;
     public bool screenClear;
 
+    public bool isOpen = false;
+
     private void Update()
     {
         if (screen1 && screen2 && screen3)
             screenClear = true;
         if (screenClear)
             Debug.Log("Solved!");
+
+        if(Input.GetKeyDown(KeyCode.G) && !isOpen)
+            isOpen = true;
+        else if(Input.GetKeyDown(KeyCode.G) && isOpen)
+            isOpen = false;
+        
     }
 }
