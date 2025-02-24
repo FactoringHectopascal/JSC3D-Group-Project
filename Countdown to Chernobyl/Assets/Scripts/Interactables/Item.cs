@@ -6,7 +6,9 @@ public class Item
     [SerializeField]
     public Sprite icon;
     public string itemName;
-    public string description;
+    public string descriptionEasy;
+    public string descriptionMedium;
+    public string descriptionHard;
     public bool isConsumable;
     public bool isCombinable;
     public string itemCombinationName;
@@ -20,11 +22,6 @@ public class Item
     public string GetName()
     {
         return itemName;
-    }
-
-    public string GetDesc()
-    {
-        return description;
     }
 
     public bool CheckConsumable()
@@ -55,5 +52,20 @@ public class Item
     public virtual void OnCombine()
     {
 
+    }
+
+    public virtual string OnInspectEasy()
+    {
+        return descriptionEasy;
+    }
+
+    public virtual string OnInspectMed()
+    {
+        return descriptionMedium;
+    }
+
+    public virtual string OnInspectHard()
+    {
+        return descriptionHard;
     }
 }

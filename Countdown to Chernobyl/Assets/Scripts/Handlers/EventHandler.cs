@@ -11,6 +11,8 @@ public class EventHandler : MonoBehaviour
     public bool screenClear;
 
     public bool isOpen = false;
+    [SerializeField]
+    public int difficulty;
 
     private void Update()
     {
