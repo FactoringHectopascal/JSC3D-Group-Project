@@ -1,43 +1,59 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Item : MonoBehaviour
+public class Item
 {
+    [SerializeField]
+    public Sprite icon;
+    public string itemName;
+    public string description;
+    public bool isConsumable;
+    public bool isCombinable;
+    public string itemCombinationName;
+    public Item itemToGive;
 
-    public string easyThought;
-    public string mediumThought;
-    public string hardThought;
-    public string objName;
-    public string playerIntTextEasy;
-    public string PlayerIntTextMedium;
-    public string PlayerIntTextHard;
-    public bool isInteractableAgain = true;
+    public Sprite GetIcon()
+    {
+        return icon;
+    }
 
-    public virtual void OnInteract()
+    public string GetName()
+    {
+        return itemName;
+    }
+
+    public string GetDesc()
+    {
+        return description;
+    }
+
+    public bool CheckConsumable()
+    {
+        return isConsumable;
+    }
+
+    public bool CheckCombinable()
+    {
+        return isCombinable;
+    }
+
+    public string ItemNeeded()
+    {
+        return itemCombinationName;
+    }
+
+    public Item ItemResult()
+    {
+        return itemToGive;
+    }
+
+    public virtual void OnEquip()
     {
 
     }
-
-    public virtual string OnThink()
+    
+    public virtual void OnCombine()
     {
-        if (GameObject.FindGameObjectWithTag("Difficulty Handler").GetComponent<DifficultyHandler>().difficulty == 1)
-            return easyThought;
-        if (GameObject.FindGameObjectWithTag("Difficulty Handler").GetComponent<DifficultyHandler>().difficulty == 2)
-            return mediumThought;
-        if (GameObject.FindGameObjectWithTag("Difficulty Handler").GetComponent<DifficultyHandler>().difficulty == 3)
-            return hardThought;
-        else return null;
-    }
 
-    public virtual string OnInteractText()
-    {
-        if (GameObject.FindGameObjectWithTag("Difficulty Handler").GetComponent<DifficultyHandler>().difficulty == 1)
-            return playerIntTextEasy;
-        if (GameObject.FindGameObjectWithTag("Difficulty Handler").GetComponent<DifficultyHandler>().difficulty == 2)
-            return PlayerIntTextMedium;
-        if (GameObject.FindGameObjectWithTag("Difficulty Handler").GetComponent<DifficultyHandler>().difficulty == 3)
-            return PlayerIntTextHard;
-        else return null;
     }
 }
-
