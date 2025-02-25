@@ -55,13 +55,13 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                Debug.Log("You can't combine these!");
+                GetComponent<Interaction>().StartCoroutine(GetComponent<Interaction>().TypewriterEffect("These items don't go together."));
                 ClearItems();
             }
         }
         else
         {
-            Debug.Log("Can't combine like this!");
+            GetComponent<Interaction>().StartCoroutine(GetComponent<Interaction>().TypewriterEffect("I can't combine this."));
             ClearItems();
         }
     }

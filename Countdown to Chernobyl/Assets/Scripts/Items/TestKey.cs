@@ -6,7 +6,7 @@ public class TestKey : Item
 {
     public TestKey()
     {
-        icon = icon = Resources.Load<Sprite>("Icons/Circle");
+        icon = Resources.Load<Sprite>("Icons/Circle");
         itemName = "Test Key";
         descriptionEasy = "Key used for testing/implementing an item system, you can use it on the door.";
         descriptionMedium = "This is a key, that goes to a door.";
