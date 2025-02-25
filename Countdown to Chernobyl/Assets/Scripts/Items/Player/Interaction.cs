@@ -56,6 +56,7 @@ public class Interaction : MonoBehaviour {
 
                 if (Input.GetKeyDown(KeyCode.I) && talking == false)
                     {
+                        hit.collider.GetComponent<Object>().OnInteract();
                         StartCoroutine(TypewriterEffect(hit.collider.GetComponent<Object>().OnThink()));
                     }
             }

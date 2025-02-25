@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class EventHandler : MonoBehaviour
 {
-    public bool testDoorLock = true; // for testing a door
     public bool usingThing; // handles the player use state
 
     public bool screen1;
@@ -11,6 +10,10 @@ public class EventHandler : MonoBehaviour
     public bool screenClear;
 
     public bool isOpen = false;
+    [SerializeField]
+    public int difficulty;
+
+    public bool keycardScanned;
 
     private void Update()
     {

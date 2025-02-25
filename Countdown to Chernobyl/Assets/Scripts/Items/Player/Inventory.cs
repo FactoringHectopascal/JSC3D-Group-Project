@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Inventory : MonoBehaviour
 {
 
@@ -54,13 +55,13 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                Debug.Log("You can't combine these!");
+                GetComponent<Interaction>().StartCoroutine(GetComponent<Interaction>().TypewriterEffect("These items don't go together."));
                 ClearItems();
             }
         }
         else
         {
-            Debug.Log("Can't combine like this!");
+            GetComponent<Interaction>().StartCoroutine(GetComponent<Interaction>().TypewriterEffect("I can't combine this."));
             ClearItems();
         }
     }
@@ -87,5 +88,15 @@ public class Inventory : MonoBehaviour
             equippedItem = null;
         if (!items.Contains(itemToCombine))
             itemToCombine = null;
+    }
+
+    public void Inspect()
+    {
+        if(equippedItem != null & itemToCombine == null && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().difficulty == 1)
+        GetComponent<Interaction>().StartCoroutine(GetComponent<Interaction>().TypewriterEffect(equippedItem.OnInspectEasy()));
+        else if (equippedItem != null & itemToCombine == null && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().difficulty == 2)
+            GetComponent<Interaction>().StartCoroutine(GetComponent<Interaction>().TypewriterEffect(equippedItem.OnInspectMed()));
+        else if (equippedItem != null & itemToCombine == null && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().difficulty == 3)
+            GetComponent<Interaction>().StartCoroutine(GetComponent<Interaction>().TypewriterEffect(equippedItem.OnInspectHard()));
     }
 }
