@@ -47,7 +47,7 @@ public class KeycardReader : Object
                 PlayerIntTextHard = "I think I need to go to the hospital.";
                 return;
             case 4:
-                playerIntTextEasy = "Okay, I actually need to go find my keycard now. Thanks for the philosophical journey, I feel the urge to read \"The Stranger\" now.";
+                playerIntTextEasy = "Okay, I actually need to go find my keycard now. Thanks for the philosophical journey, I feel less useless.";
                 PlayerIntTextMedium = "Now that I've become an exponent of Stoic philosophy, I need to go find my keycard. Or not. I'm fine with whatever.";
                 PlayerIntTextHard = "Keycard.. Need.. Keycard..";
                 return;
