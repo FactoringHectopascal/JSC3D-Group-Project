@@ -27,8 +27,8 @@ public class KeycardReader : Object
             GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keycardScanned = true;
         }
 
-        if (interactionCount >= 4 && !GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keycardScanned && !GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Keycard"))
-            interactionCount = 4;
+        if (interactionCount >= 5 && !GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keycardScanned && !GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Keycard"))
+            interactionCount = 5;
 
         if(GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Keycard"))
         {
@@ -40,23 +40,23 @@ public class KeycardReader : Object
 
         switch (interactionCount)
         {
-            case 1:
-                playerIntTextEasy = "I wasn't lying, I'm nothing without my keycard.";
+            case 2:
+                playerIntTextEasy = "I really need that keycard! What am I without it?";
                 PlayerIntTextMedium = "I still can't do anything with this! My heart is hollow without my keycard..";
                 PlayerIntTextHard = "Is there something wrong with me?";
                 return;
-            case 2:
+            case 3:
                 playerIntTextEasy = "I'm still useless! No man can bear the weight of this keycard-less existence!";
                 PlayerIntTextMedium = "I said let's go! I can't do anything, it's killing me! I miss my keycard!";
                 PlayerIntTextHard = "Did I hit my head or something? What am I still doing standing here?";
                 return;
-            case 3:
+            case 4:
                 playerIntTextEasy = "I've opened my soul up to the absurdity of the universe, I am fine living a meaningless existence. I find beauty in the disordered experience I live.";
                 PlayerIntTextMedium = "I've come to accept that sometimes it's okay to sit around and soak in the atmosphere. It's just you and me keycard reader.";
                 PlayerIntTextHard = "I think I need to go to the hospital.";
                 return;
-            case 4:
-                playerIntTextEasy = "Okay, I actually need to go find my keycard now. Thanks for the philosophical journey, I feel less useless.";
+            case 5:
+                playerIntTextEasy = "Okay, it's time to stop waxing philosophical and find my keycard!";
                 PlayerIntTextMedium = "Now that I've become an exponent of Stoic philosophy, I need to go find my keycard. Or not. I'm fine with whatever.";
                 PlayerIntTextHard = "Keycard.. Need.. Keycard..";
                 return;
