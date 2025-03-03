@@ -9,7 +9,7 @@ public class KeycardReader : Object
         easyThought = "A keycard reader, I need to find my keycard to scan in.";
         mediumThought = "The keycard reader, I need my keycard to scan in.";
         hardThought = "The keycard reader, I need my keycard.";
-        playerIntTextEasy = "I need to find my keycard, I'm useless without it!";
+        playerIntTextEasy = "I can't scan in without my keycard.";
         PlayerIntTextMedium = "Huh... I can't do anything with this!";
         PlayerIntTextHard = "What am I doing? I can't scan in with my bare hand.";
     }
@@ -17,17 +17,26 @@ public class KeycardReader : Object
     public override void OnInteract()
     {
 
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().items.Contains(new Keycard()))
-        {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().equippedItem != null && GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().equippedItem.GetName() == "Keycard")
+        { 
             interactionCount = 1000;
             playerIntTextEasy = "Nice! I finally swiped in. Time to get in there.";
             PlayerIntTextMedium = "Finally.. Now I can get to work!";
             PlayerIntTextHard = "Cool. I'm all set.";
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().RemoveItem(GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GetItem("Keycard"));
             GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keycardScanned = true;
         }
 
-        if (interactionCount >= 4 && !GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().items.Contains(new Keycard()))
+        if (interactionCount >= 4 && !GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keycardScanned && !GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Keycard"))
             interactionCount = 4;
+
+        if(GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Keycard"))
+        {
+            interactionCount = 1000;
+            playerIntTextEasy = "I have my keycard, I just need to use it. I should probably try pressing G and clicking the keycard icon, then interacting with the keycard reader.";
+            PlayerIntTextMedium = "I need to equip my keycard, I should try pressing G and then clicking it. After that I should be all set to interact with the reader.";
+            PlayerIntTextHard = "I need to press G and click my keycard to equip it so I can interact with the reader here.";
+        }
 
         switch (interactionCount)
         {
@@ -56,7 +65,7 @@ public class KeycardReader : Object
 
     public override void OnInspect()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().items.Contains(new Keycard()))
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Keycard"))
         {
             easyThought = "Now that I found my keycard, I can use it here.";
             mediumThought = "Now that I have my keycard, it's time to swipe in.";

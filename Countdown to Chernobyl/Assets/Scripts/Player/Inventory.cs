@@ -66,6 +66,18 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public bool HasItem(string itemName)
+    {
+        foreach (Item item in items)
+        {
+            if (item.GetName() == itemName)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void ClearItems()
     {
         equippedItem = null;
