@@ -4,42 +4,63 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public FirstPersonController playerController; // Assign in Inspector
+    public EventHandler eventHandler; // Assign in Inspector
 
-    // Use this for initialization
     void Start()
     {
         GetComponent<Canvas>().enabled = false;
+
+        if (playerController == null)
+        {
+            Debug.LogError("Player Controller reference is missing in the PauseMenu script!");
+        }
+        if (eventHandler == null)
+        {
+            Debug.LogError("Event Handler reference is missing in the PauseMenu script!");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 1)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Pause();
+            if (Time.timeScale == 1)
+                Pause();
+            else
+                Resume();
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 0)
-        {
-            Resume();
-        }
-
     }
 
     public void Resume()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonController>().RotationSpeed = 1;
+        if (playerController == null || eventHandler == null)
+        {
+            Debug.LogError("PlayerController or EventHandler is not assigned in the Inspector.");
+            return;
+        }
+
+        playerController.RotationSpeed = 1;
         Time.timeScale = 1;
         GetComponent<Canvas>().enabled = false;
-        if (GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().usingThing != true || GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().isOpen != true)
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        UnityEngine.Cursor.visible = false;
+
+        if (!eventHandler.usingThing && !eventHandler.isOpen)
+        {
+            UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+            UnityEngine.Cursor.visible = false;
+        }
     }
 
     public void Pause()
     {
+        if (playerController == null)
+        {
+            Debug.LogError("PlayerController is missing.");
+            return;
+        }
+
         Time.timeScale = 0;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonController>().RotationSpeed = 0;
+        playerController.RotationSpeed = 0;
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         UnityEngine.Cursor.visible = true;
         GetComponent<Canvas>().enabled = true;
@@ -56,3 +77,4 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 }
+
