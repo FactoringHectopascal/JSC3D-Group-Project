@@ -22,13 +22,12 @@ public class InvMenuBehavior : MonoBehaviour
         TryGetComponent(out textMeshPro);
     }
 
-    void Update() // ? Now properly recognized by Unity
+    void Update() 
     {
         if (eventH == null)
         {
             Debug.LogError("eventH is null! Check if the Event Handler GameObject exists and has the EventHandler script.");
-            return;
-        }
+            return;         }
 
         if (image != null)
             image.enabled = eventH.isOpen;
