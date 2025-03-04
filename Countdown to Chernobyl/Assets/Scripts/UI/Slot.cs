@@ -61,7 +61,7 @@ public class Slot : MonoBehaviour
 
     public void OpenSlots()
     {
-    if (!disabled && eventH.isOpen)
+    if (!disabled && !eventH.isOpen)
     {
             image.enabled = true;
             button.enabled = true;
