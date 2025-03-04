@@ -7,30 +7,33 @@ public class InvMenuBehavior : MonoBehaviour
     EventHandler eventH;
     GameObject eH;
     Image image;
-    TMPro.TextMeshProUGUI textMeshPro;
-    
+    TextMeshProUGUI textMeshPro;
+
     void Start()
     {
         eH = GameObject.FindGameObjectWithTag("Event Handler");
-        eventH = eH.GetComponent<EventHandler>();
-        TryGetComponent<Image>(out Image _Image);
-        if(_Image != null)
-            image = _Image;
-        TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI _textMeshPro);
-        if(_textMeshPro != null)
-            textMeshPro = _textMeshPro;
+
+        if (eH != null)
+            eventH = eH.GetComponent<EventHandler>();
+        else
+            Debug.LogError("Event Handler GameObject not found! Make sure it exists and has the correct tag.");
+
+        TryGetComponent(out image);
+        TryGetComponent(out textMeshPro);
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() 
     {
-        if (eventH.isOpen && image != null)
-            image.enabled = true;
-        else if (!eventH.isOpen && image != null)
-            image.enabled = false;
-        if(eventH.isOpen && textMeshPro != null)
-            textMeshPro.enabled = true;
-        else if (!eventH.isOpen && textMeshPro != null)
-            textMeshPro.enabled = false;
+        if (eventH == null)
+        {
+            Debug.LogError("eventH is null! Check if the Event Handler GameObject exists and has the EventHandler script.");
+            return;       
+        }
+
+        if (image != null)
+            image.enabled = eventH.isOpen;
+
+        if (textMeshPro != null)
+            textMeshPro.enabled = eventH.isOpen;
     }
 }
