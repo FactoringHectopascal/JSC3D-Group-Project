@@ -7,6 +7,16 @@ public class Keypad : Object
 
     bool usingThis = false;
 
+    [SerializeField]
+    int keypadNum;
+
+    [SerializeField]
+    int codeCount;
+
+    bool unlocked = false;
+
+
+    bool noMore = false;
     public Keypad()
     {
         easyThought = "It looks like I can put in a code here to unlock something.";
@@ -25,7 +35,9 @@ public class Keypad : Object
     public override void OnInteract()
     {
         GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().usingThing = true;
+        if (!unlocked)
         keypad.enabled = true;
+        if(!unlocked)
         usingThis = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -34,19 +46,28 @@ public class Keypad : Object
 
     public void CodeCheck()
     {
-        if (inputField.text == code)
+        if (inputField.text == code && inputField.text.Length == codeCount && !noMore)
         {
             Debug.Log("You did it!");
             ResetCursor();
             keypad.enabled = false;
+            unlocked = true;
             isInteractableAgain = false;
-            GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().usingThing = false;
             playerIntTextEasy = "Aha! Get unlocked!";
             PlayerIntTextMedium = "That was nothin'";
             PlayerIntTextHard = "Got it open..";
             usingThis = false;
+            if (keypadNum == 1)
+                GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keypad1 = true;
+            else if (keypadNum == 2)
+                GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keypad2 = true;
+            else if (keypadNum == 3)
+                GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keypad3 = true;
+            GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().usingThing = false;
+            noMore = true;
+
         }
-        else if (inputField.text != code && inputField.text != "")
+        else if (inputField.text != code && inputField.text != "" && inputField.text.Length == codeCount)
         {
             Debug.Log("Incorrect Buzzer");
             ResetCursor();

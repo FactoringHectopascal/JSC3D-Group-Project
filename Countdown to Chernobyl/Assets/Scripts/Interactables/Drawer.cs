@@ -1,7 +1,14 @@
+using System.Threading;
 using UnityEngine;
 
 public class Drawer : Object
 {
+    [SerializeField]
+    bool locked;
+
+    [SerializeField]
+    bool monitorDrawer;
+
     public Drawer()
     {
         objName = "Drawer";
@@ -15,18 +22,15 @@ public class Drawer : Object
 
     public override void OnInteract()
     {
-        if (GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screenClear == true)
+        if (GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screenClear == true || !locked && !monitorDrawer)
         {
-            playerIntTextEasy = "Oh cool! Let's take a peek at what's in here.";
-            PlayerIntTextMedium = "Here we go! Now let's see..";
-            PlayerIntTextHard = "Nice! I got it open!";
             GetComponent<Animator>().Play("Pullout");
         }    
     }
 
     public override void OnInspect()
     {
-        if (GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screenClear == true)
+        if (GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screenClear == true && monitorDrawer)
         {
             easyThought = "I should definitely try the handle now that I've got that puzzle solved.";
             mediumThought = "I think I might be able to open it now.";

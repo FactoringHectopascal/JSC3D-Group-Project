@@ -9,6 +9,14 @@ public class EventHandler : MonoBehaviour
     public bool screen3;
     public bool screenClear;
 
+    public int rotationG;
+    public int rotationB;
+    public int rotationS;
+
+    public bool keypad1;
+    public bool keypad2;
+    public bool keypad3;
+
     public bool isOpen = false;
     [SerializeField]
     public int difficulty;
