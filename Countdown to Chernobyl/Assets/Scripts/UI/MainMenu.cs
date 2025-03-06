@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
     // Function to start the game when the button is clicked
     public void StartGame()
     {
-        SceneManager.LoadScene("Countdown To Chernoybl"); // Replace "GameLevel" with your actual game scene name
+        SceneManager.LoadScene("Countdown To Chernobyl"); // Replace "GameLevel" with your actual game scene name
     }
 
     // Function to quit the game when the button is clicked
