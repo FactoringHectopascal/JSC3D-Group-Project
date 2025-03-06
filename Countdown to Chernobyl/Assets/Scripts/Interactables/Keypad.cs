@@ -17,6 +17,7 @@ public class Keypad : Object
 
 
     bool noMore = false;
+
     public Keypad()
     {
         easyThought = "It looks like I can put in a code here to unlock something.";
@@ -34,6 +35,7 @@ public class Keypad : Object
 
     public override void OnInteract()
     {
+
         GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().usingThing = true;
         if (!unlocked)
         keypad.enabled = true;
@@ -48,7 +50,6 @@ public class Keypad : Object
     {
         if (inputField.text == code && inputField.text.Length == codeCount && !noMore)
         {
-            Debug.Log("You did it!");
             ResetCursor();
             keypad.enabled = false;
             unlocked = true;
@@ -60,10 +61,18 @@ public class Keypad : Object
             if (keypadNum == 1)
                 GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keypad1 = true;
             else if (keypadNum == 2)
+            {
                 GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keypad2 = true;
+
+                Item _item = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GetItem("First paper with shapes.");
+                Item __item = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GetItem("Second paper with shapes.");
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().RemoveItem(_item);
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().RemoveItem(__item);
+            }
             else if (keypadNum == 3)
                 GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keypad3 = true;
             GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().usingThing = false;
+            inputField.text = "";
             noMore = true;
 
         }
@@ -86,6 +95,22 @@ public class Keypad : Object
         VisionCheck();
         RangeCheck();
         CodeCheck();
+
+        if (keypadNum == 1 && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keypad1 == false)
+        {
+            isInteractableAgain = true;
+            noMore = false;
+        }
+        else if (keypadNum == 2 && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keypad2 == false)
+        {
+            isInteractableAgain = true;
+            noMore = false;
+        }
+        else if (keypadNum == 3 && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keypad3 == false)
+        {
+            isInteractableAgain = true;
+            noMore = false;
+        }
     }
 
     public void RangeCheck()

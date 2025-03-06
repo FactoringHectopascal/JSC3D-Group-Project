@@ -16,6 +16,29 @@ public class KeycardObj : Object
     public override void OnInteract()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().AddItem(new Keycard());
-        Destroy(gameObject);
+        isCollected = true;
+        MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer renderer in renderers)
+            {
+                renderer.enabled = false;
+            }
+
+            GetComponent<BoxCollider>().enabled = false;
+    }
+
+    void Update()
+    {
+        if(!GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keycardScanned && !GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Keycard"))
+        {
+            MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer renderer in renderers)
+            {
+                renderer.enabled = true;
+            }
+
+            GetComponent<BoxCollider>().enabled = true;
+            isCollected = true;
+        }
     }
 }
+

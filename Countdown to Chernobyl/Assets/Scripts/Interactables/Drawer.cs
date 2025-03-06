@@ -9,6 +9,7 @@ public class Drawer : Object
     [SerializeField]
     bool monitorDrawer;
 
+
     public Drawer()
     {
         objName = "Drawer";
@@ -25,7 +26,14 @@ public class Drawer : Object
         if (GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screenClear == true || !locked && !monitorDrawer)
         {
             GetComponent<Animator>().Play("Pullout");
+            isInteractableAgain = false;
         }    
+        if(GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screenClear == true && monitorDrawer)
+        {
+            playerIntTextEasy = "Nice! I got it unlocked!";
+            PlayerIntTextMedium = "Awesome! I got this unlocked!";
+            PlayerIntTextHard = "Time to see what's in here.";
+        }
     }
 
     public override void OnInspect()

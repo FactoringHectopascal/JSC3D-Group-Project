@@ -3,10 +3,16 @@ using UnityEngine;
 public class Button1 : Object
 {
 
-    [SerializeField]
-    Material materialRed;
-    [SerializeField]
-    Material materialGreen;
+    public Material[] material;
+    Renderer rend;
+
+    void Start()
+    {
+        rend = GetComponent<Renderer>();
+        rend.enabled = true;
+        rend.sharedMaterial = material[0];
+    }
+
     public Button1()
     {
         easyThought = "Huh, a computer. If I click it I think the colors on the monitor change.";
@@ -29,6 +35,8 @@ public class Button1 : Object
 
     private void Update()
     {
-
+        if(GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screen1)
+            rend.sharedMaterial = material[1];
+            else rend.sharedMaterial = material[0];
     }
 }

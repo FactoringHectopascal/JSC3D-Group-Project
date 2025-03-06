@@ -3,6 +3,9 @@ using UnityEngine;
 public class Locker : Object
 {
 
+    public bool circlePuzzle;
+    public bool keyPuzzle;
+
     public bool locked;
     public Locker()
     {
@@ -17,17 +20,28 @@ public class Locker : Object
 
     public override void OnInteract()
     {
+
+        if(circlePuzzle && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().rotationPuzzle)
+            locked = false;
+
+        if(keyPuzzle &&  GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Grey Key"))
+        {
+            Item _item = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GetItem("Grey Key");
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().RemoveItem(_item);
+            locked = false;
+        }
+
         if(!locked)
         {
             GetComponent<Animator>().Play("Open");
             if (interactionCount > 1)
             {
                 playerIntTextEasy = "Well it's open.";
-                PlayerIntTextMedium = "Whose locker is this anyway?";
-                PlayerIntTextHard = "Wow. Did someone sneak my keycard?";
-                easyThought = "Someone is definitely getting written up for leaving their locker open.";
-                mediumThought = "Who put MY keycard in THEIR locker? It has MY name on it!";
-                hardThought = "Very interesting, I'm going to chew someone out later.";
+                PlayerIntTextMedium = "An open locker, good job me.";
+                PlayerIntTextHard = "Wow. I really opened it didn't I?";
+                easyThought = "I'm so cool, I got that locker open!";
+                mediumThought = "That was nothin'!";
+                hardThought = "Very interesting, I definitely knocked that one out of the park. I got that locker open all by myself!";
             }
         }
         

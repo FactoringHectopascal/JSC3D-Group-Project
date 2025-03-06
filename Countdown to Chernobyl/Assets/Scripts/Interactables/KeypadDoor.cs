@@ -22,5 +22,7 @@ public class KeypadDoor : Door
             condition = GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keypad3;
         if (condition)
             GetComponent<Animator>().Play("DoorOpen");
+            if (!condition)
+            GetComponent<Animator>().Play("DoorClose");
     }
 }

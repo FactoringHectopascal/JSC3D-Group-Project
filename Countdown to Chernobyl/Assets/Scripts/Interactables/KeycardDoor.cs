@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ public class KeycardDoor : Door
         condition = GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keycardScanned;
         if (condition)
             GetComponent<Animator>().Play("DoorOpen");
+        if (!condition)
+            GetComponent<Animator>().Play("DoorClose");
     }
-
 }

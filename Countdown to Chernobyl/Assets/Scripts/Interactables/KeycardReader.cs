@@ -20,9 +20,9 @@ public class KeycardReader : Object
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().equippedItem != null && GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().equippedItem.GetName() == "Keycard")
         { 
             interactionCount = 1000;
-            playerIntTextEasy = "Nice! I finally swiped in. Time to get in there.";
-            PlayerIntTextMedium = "Finally.. Now I can get to work!";
-            PlayerIntTextHard = "Cool. I'm all set.";
+            playerIntTextEasy = "Nice!";
+            PlayerIntTextMedium = "Finally..";
+            PlayerIntTextHard = "Cool.";
             GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().RemoveItem(GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GetItem("Keycard"));
             GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keycardScanned = true;
         }

@@ -2,6 +2,16 @@ using UnityEngine;
 
 public class Button2 : Object
 {
+    public Material[] material;
+    Renderer rend;
+
+    void Start()
+    {
+        rend = GetComponent<Renderer>();
+        rend.enabled = true;
+        rend.sharedMaterial = material[0];
+    }
+
     public Button2()
     {
         easyThought = "A button, I think I can use this to interact with those screens.";
@@ -20,5 +30,12 @@ public class Button2 : Object
         GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screen1 = true;
         GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screen2 = true;
         GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screen3 = false;
+    }
+
+    void Update()
+    {
+        if(GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screen2)
+            rend.sharedMaterial = material[1];
+                else rend.sharedMaterial = material[0];
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Difficulty Handler
   - Interactable
   - Event Handler
+  - Door
   layers:
   - Default
   - TransparentFX

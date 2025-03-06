@@ -16,6 +16,21 @@ public class Object : MonoBehaviour
     public bool repeatDialogue = true; // same thing here
     public int interactionCount;
     public int inspectionCount;
+    public bool isCollected;
+
+    void Update()
+    {
+        if(isCollected)
+        {
+             MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer renderer in renderers)
+            {
+                renderer.enabled = false;
+            }
+
+            GetComponent<BoxCollider>().enabled = false;
+        }
+    }
     public virtual void OnInteract()
     {
   
