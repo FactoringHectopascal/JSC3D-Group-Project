@@ -6,11 +6,11 @@ public class RotationButton : Object
 
     public override void OnInteract()
     {
-            if(assignedCircle == 1)
+            if(assignedCircle == 1 && !GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().rotationPuzzle)
             GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().rotationG++;
-            else if(assignedCircle == 2)
+            else if(assignedCircle == 2 && !GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().rotationPuzzle)
             GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().rotationB++;
-            else if(assignedCircle == 3)
+            else if(assignedCircle == 3 && !GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().rotationPuzzle)
             GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().rotationS++;
             repeatDialogue = false;
     }

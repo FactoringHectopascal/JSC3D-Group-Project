@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+
 using UnityEngine;
 
 public class Keycard : Item
@@ -7,9 +7,9 @@ public class Keycard : Item
     {
         icon = icon = Resources.Load<Sprite>("Icons/Keycard");
         itemName = "Keycard";
-        descriptionEasy = "My keycard! I can use this to open the door to the control room.";
-        descriptionMedium = "This looks like my keycard. I can use this.";
-        descriptionHard = "A keycard, I think it's mine.";
+        descriptionEasy = "A keycard! I wonder whose this is? Anyways, I can unequip it by hitting the minus symbol. I can also close the item menu by hitting G again.";
+        descriptionMedium = "A keycard! I wonder whose this is? Anyways, I can unequip it by hitting the minus symbol. I can also close the item menu by hitting G again.";
+        descriptionHard = "A keycard! I wonder whose this is? Anyways, I can unequip it by hitting the minus symbol. I can also close the item menu by hitting G again.";
         isConsumable = true;
         isCombinable = false;
         itemCombinationName = null;

@@ -17,6 +17,11 @@ public class Interaction : MonoBehaviour {
         RaycastInteract();
     }
 
+    void Start()
+    {
+        StartCoroutine(TypewriterEffect("What's up YuChube! Here I am in an abandoned facility, and I'm gonna be exploring it to celebrate five subscribers! To start, I should probably interact with that card reader. That way I can get that door open!"));  
+    }
+
     public IEnumerator TypewriterEffect(string text)
     {
         talking = true;

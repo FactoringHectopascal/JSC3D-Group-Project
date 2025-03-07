@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Keypad : Object
 {
@@ -35,15 +34,37 @@ public class Keypad : Object
 
     public override void OnInteract()
     {
-
-        GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().usingThing = true;
-        if (!unlocked)
-        keypad.enabled = true;
-        if(!unlocked)
-        usingThis = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        Debug.Log("Using");
+        
+        if(keypadNum == 2 && !GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("First paper with shapes.") || keypadNum == 2 && !GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Second paper with shapes."))
+        {
+           if (GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().talking == false)
+           {
+                 GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().StartCoroutine(GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().TypewriterEffect("I should have a good look around first, then touch this."));
+                return;
+           }
+        }
+        if (keypadNum == 1 && !GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Bloody Paper with Luminol"))
+        {
+            if (GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().talking == false)
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().StartCoroutine(GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().TypewriterEffect("I don't think I have what's needed yet to solve this."));
+                return;
+        }
+        if (keypadNum == 3 && !GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Hexidecimal Paper"))
+        {
+            if (GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().talking == false)
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().StartCoroutine(GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().TypewriterEffect("This is too confusing, I don't think I have what I need yet to enter the code on this."));
+                return;
+        }
+            
+            GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().usingThing = true;
+            if (!unlocked)
+            keypad.enabled = true;
+            if(!unlocked)
+            usingThis = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Debug.Log("Using");
+        
     }
 
     public void CodeCheck()

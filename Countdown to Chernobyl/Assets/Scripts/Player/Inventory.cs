@@ -12,13 +12,9 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Item item)
     {
-        if (items.Count == 3)
-            Debug.Log("You are carrying too much!");
-        else
-        {
+        
             items.Add(item);
             Debug.Log($"Picked up {item.GetName()}");
-        }
     }
 
     public Item GetItem(string itemName)
@@ -55,12 +51,14 @@ public class Inventory : MonoBehaviour
             }
             else
             {
+                if(!GetComponent<Interaction>().talking)
                 GetComponent<Interaction>().StartCoroutine(GetComponent<Interaction>().TypewriterEffect("These items don't go together."));
                 ClearItems();
             }
         }
         else
         {
+            if(!GetComponent<Interaction>().talking)
             GetComponent<Interaction>().StartCoroutine(GetComponent<Interaction>().TypewriterEffect("I can't combine this."));
             ClearItems();
         }
@@ -104,11 +102,11 @@ public class Inventory : MonoBehaviour
 
     public void Inspect()
     {
-        if(equippedItem != null & itemToCombine == null && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().difficulty == 1)
+        if(equippedItem != null & itemToCombine == null && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().difficulty == 1 && GetComponent<Interaction>().talking == false)
         GetComponent<Interaction>().StartCoroutine(GetComponent<Interaction>().TypewriterEffect(equippedItem.OnInspectEasy()));
-        else if (equippedItem != null & itemToCombine == null && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().difficulty == 2)
+        else if (equippedItem != null & itemToCombine == null && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().difficulty == 2 && GetComponent<Interaction>().talking == false)
             GetComponent<Interaction>().StartCoroutine(GetComponent<Interaction>().TypewriterEffect(equippedItem.OnInspectMed()));
-        else if (equippedItem != null & itemToCombine == null && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().difficulty == 3)
+        else if (equippedItem != null & itemToCombine == null && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().difficulty == 3 && GetComponent<Interaction>().talking == false)
             GetComponent<Interaction>().StartCoroutine(GetComponent<Interaction>().TypewriterEffect(equippedItem.OnInspectHard()));
     }
 }

@@ -27,9 +27,15 @@ public class Button2 : Object
     {
         if (interactionCount > 1)
             repeatDialogue = false;
+
+        if(!GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screenClear)
+        {
         GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screen1 = true;
         GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screen2 = true;
         GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screen3 = false;
+        }
+        else 
+        isInteractableAgain = false;
     }
 
     void Update()

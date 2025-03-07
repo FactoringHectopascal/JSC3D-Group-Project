@@ -1,4 +1,4 @@
-using System.Threading;
+
 using UnityEngine;
 
 public class Drawer : Object
@@ -23,16 +23,18 @@ public class Drawer : Object
 
     public override void OnInteract()
     {
-        if (GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screenClear == true || !locked && !monitorDrawer)
+        if (!locked && !monitorDrawer)
         {
             GetComponent<Animator>().Play("Pullout");
             isInteractableAgain = false;
         }    
-        if(GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screenClear == true && monitorDrawer)
+        else if(GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screenClear == true && monitorDrawer)
         {
             playerIntTextEasy = "Nice! I got it unlocked!";
             PlayerIntTextMedium = "Awesome! I got this unlocked!";
             PlayerIntTextHard = "Time to see what's in here.";
+            GetComponent<Animator>().Play("Pullout");
+            isInteractableAgain = false;
         }
     }
 

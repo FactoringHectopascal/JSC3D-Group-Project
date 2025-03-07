@@ -1,6 +1,3 @@
-using JetBrains.Annotations;
-using UnityEngine;
-using UnityEngine.UI;
 
 public class ComboItem2 : Item
 {

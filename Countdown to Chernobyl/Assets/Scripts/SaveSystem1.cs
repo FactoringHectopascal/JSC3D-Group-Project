@@ -1,10 +1,7 @@
 using UnityEngine;
-using System;
 using System.IO;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
 using StarterAssets;
-using NUnit.Framework;
 
 public class SaveSystem : MonoBehaviour
 {
@@ -50,7 +47,7 @@ public class SaveSystem : MonoBehaviour
         // Ensure the directory exists before saving the file
         EnsureDirectoryExists();
 
-         string filePath = GetSaveFilePath();
+        string filePath = GetSaveFilePath();
         if (File.Exists(filePath))
         {
             File.Delete(filePath);
@@ -66,22 +63,22 @@ public class SaveSystem : MonoBehaviour
         SaveData data = new SaveData();
 
         EventHandler eventHandler = GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>();
-    if (eventHandler != null)
-    {
-        data.screen1 = eventHandler.screen1;
-        data.screen2 = eventHandler.screen2;
-        data.screen3 = eventHandler.screen3;
-        data.screenClear = eventHandler.screenClear;
-        data.isOpen = eventHandler.isOpen;
-        data.usingThing = eventHandler.usingThing;
-        data.rotationG = eventHandler.rotationG;
-        data.rotationB = eventHandler.rotationB;
-        data.rotationS = eventHandler.rotationS;
-        data.keypad1 = eventHandler.keypad1;
-        data.keypad2 = eventHandler.keypad2;
-        data.keypad3 = eventHandler.keypad3;
-        data.keycardScanned = eventHandler.keycardScanned;
-    }
+        if (eventHandler != null)
+        {
+            data.screen1 = eventHandler.screen1;
+            data.screen2 = eventHandler.screen2;
+            data.screen3 = eventHandler.screen3;
+            data.screenClear = eventHandler.screenClear;
+            data.isOpen = eventHandler.isOpen;
+            data.usingThing = eventHandler.usingThing;
+            data.rotationG = eventHandler.rotationG;
+            data.rotationB = eventHandler.rotationB;
+            data.rotationS = eventHandler.rotationS;
+            data.keypad1 = eventHandler.keypad1;
+            data.keypad2 = eventHandler.keypad2;
+            data.keypad3 = eventHandler.keypad3;
+            data.keycardScanned = eventHandler.keycardScanned;
+        }
 
         // Save player position
         data.playerPosition = player.transform.position;
@@ -113,11 +110,11 @@ public class SaveSystem : MonoBehaviour
     // Load game data including inventory and player position
     public void LoadGame()
     {
-        // Temporarily disable the FirstPersonController to prevent movement during loading
-            if (firstPersonController != null)
-            {
-                firstPersonController.enabled = false;
-            }
+        // Disable movement and interactions during the loading phase
+        if (firstPersonController != null)
+        {
+            firstPersonController.enabled = false;
+        }
 
         string filePath = GetSaveFilePath();
         if (File.Exists(filePath))
@@ -131,8 +128,7 @@ public class SaveSystem : MonoBehaviour
 
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-            
-            // Load player position
+            // Ensure the player's position is only set once
             player.transform.position = data.playerPosition;
 
             // Load inventory items
@@ -143,6 +139,7 @@ public class SaveSystem : MonoBehaviour
                 playerInventory.AddItem(item);  // Add items back to the player's inventory
             }
 
+            // Load event handler data
             EventHandler eventHandler = GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>();
             if (eventHandler != null)
             {
@@ -163,7 +160,7 @@ public class SaveSystem : MonoBehaviour
 
             Debug.Log("Game Loaded!");
 
-            // Re-enable the FirstPersonController
+            // Re-enable the FirstPersonController to allow player movement
             if (firstPersonController != null)
             {
                 firstPersonController.enabled = true;
@@ -220,6 +217,7 @@ public class SaveSystem : MonoBehaviour
         }
     }
 }
+
 
 
 [System.Serializable]

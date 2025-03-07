@@ -1,0 +1,33 @@
+using UnityEngine;
+
+public class KeyBladeOBJ : Object
+{
+
+    public override void OnInteract()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().AddItem(new BladeKey());
+        MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer renderer in renderers)
+            {
+                renderer.enabled = false;
+            }
+
+            GetComponent<BoxCollider>().enabled = false;
+        isCollected = true;
+    }
+
+    void Update()
+    {
+        
+        if(!isCollected && !GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Blade of a key"))
+        {
+            MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer renderer in renderers)
+            {
+                renderer.enabled = true;
+            }
+
+            GetComponent<BoxCollider>().enabled = true;
+        }
+    }
+}

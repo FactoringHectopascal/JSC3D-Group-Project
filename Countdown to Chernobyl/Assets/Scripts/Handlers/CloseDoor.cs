@@ -4,13 +4,14 @@ public class CloseDoor : MonoBehaviour
 {
     int stopAfterOne;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if(other.tag == "Player" && stopAfterOne < 1)
         {
-        GameObject.FindGameObjectWithTag("Door").GetComponentInChildren<Animator>().Play("DoorClose");
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().StartCoroutine(GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().TypewriterEffect("Did the door just close behind me!? Crap! I gotta seek a way out of here!"));
+            GetComponent<Animator>().Play("DoorClose");
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().StartCoroutine(GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().TypewriterEffect("What the hell!? The door just closed behind me! Crap! I gotta find a way out of here!"));
         stopAfterOne++;
         }
     }
+
 }

@@ -25,6 +25,9 @@ public class ShapePaperOBJ : Object
             GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().AddItem(new ShapePaper2());
             else if (paperToGive == 3)
             GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().AddItem(new HexPaper());
+            else if (paperToGive == 4)
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().AddItem(new BloodyPaper());
+            
             isCollected = true;
             MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer renderer in renderers)

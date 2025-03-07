@@ -10,7 +10,7 @@ public class BladeKey : Item
         descriptionHard = "The end of a key, useless without the beginning. It's all about the journey.";
         isConsumable = true;
         isCombinable = true;
-        itemCombinationName = "Blade of a Key";
+        itemCombinationName = "Bow of a Key";
         itemToGive = new GreyKey();
     }
 }

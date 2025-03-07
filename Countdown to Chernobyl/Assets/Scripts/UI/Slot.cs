@@ -1,9 +1,5 @@
-using JetBrains.Annotations;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class Slot : MonoBehaviour
 {

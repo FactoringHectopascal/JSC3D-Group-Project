@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class KeycardReader : Object
@@ -20,11 +20,14 @@ public class KeycardReader : Object
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().equippedItem != null && GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().equippedItem.GetName() == "Keycard")
         { 
             interactionCount = 1000;
-            playerIntTextEasy = "Nice!";
-            PlayerIntTextMedium = "Finally..";
-            PlayerIntTextHard = "Cool.";
+            playerIntTextEasy = "";
+            PlayerIntTextMedium = "";
+            PlayerIntTextHard = "";
             GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().RemoveItem(GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GetItem("Keycard"));
             GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keycardScanned = true;
+            GameObject.FindGameObjectWithTag("Door").GetComponent<Animator>().Play("DoorOpen");
+            if(GameObject.FindGameObjectWithTag("Door").GetComponent<KeycardDoor>().stopAfterOne == 1)
+            GameObject.FindGameObjectWithTag("Door").GetComponent<KeycardDoor>().stopAfterOne--;
         }
 
         if (interactionCount >= 5 && !GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keycardScanned && !GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Keycard"))
@@ -33,21 +36,21 @@ public class KeycardReader : Object
         if(GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Keycard"))
         {
             interactionCount = 1000;
-            playerIntTextEasy = "I have my keycard, I just need to use it. I should probably try pressing G and clicking the keycard icon, then interacting with the keycard reader.";
-            PlayerIntTextMedium = "I need to equip my keycard, I should try pressing G and then clicking it. After that I should be all set to interact with the reader.";
-            PlayerIntTextHard = "I need to press G and click my keycard to equip it so I can interact with the reader here.";
+            playerIntTextEasy = "I have a keycard, I just need to use it. I should probably try pressing G and clicking the keycard icon, then interacting with the keycard reader.";
+            PlayerIntTextMedium = "I need to equip a keycard, I should try pressing G and then clicking it. After that I should be all set to interact with the reader.";
+            PlayerIntTextHard = "I need to press G and click the keycard to equip it so I can interact with the reader here.";
         }
 
         switch (interactionCount)
         {
             case 2:
                 playerIntTextEasy = "I really need that keycard! What am I without it?";
-                PlayerIntTextMedium = "I still can't do anything with this! My heart is hollow without my keycard..";
+                PlayerIntTextMedium = "I still can't do anything with this! My heart is hollow without a keycard..";
                 PlayerIntTextHard = "Is there something wrong with me?";
                 return;
             case 3:
                 playerIntTextEasy = "I'm still useless! No man can bear the weight of this keycard-less existence!";
-                PlayerIntTextMedium = "I said let's go! I can't do anything, it's killing me! I miss my keycard!";
+                PlayerIntTextMedium = "I said let's go! I can't do anything, it's killing me!";
                 PlayerIntTextHard = "Did I hit my head or something? What am I still doing standing here?";
                 return;
             case 4:
@@ -56,8 +59,8 @@ public class KeycardReader : Object
                 PlayerIntTextHard = "I think I need to go to the hospital.";
                 return;
             case 5:
-                playerIntTextEasy = "Okay, it's time to stop waxing philosophical and find my keycard!";
-                PlayerIntTextMedium = "Now that I've become an exponent of Stoic philosophy, I need to go find my keycard. Or not. I'm fine with whatever.";
+                playerIntTextEasy = "Okay, it's time to stop waxing philosophical and find a keycard!";
+                PlayerIntTextMedium = "Now that I've become an exponent of Stoic philosophy, I need to go find a keycard. Or not. I'm fine with whatever.";
                 PlayerIntTextHard = "Keycard.. Need.. Keycard..";
                 return;
         }
@@ -67,9 +70,9 @@ public class KeycardReader : Object
     {
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Keycard"))
         {
-            easyThought = "Now that I found my keycard, I can use it here.";
-            mediumThought = "Now that I have my keycard, it's time to swipe in.";
-            hardThought = "I've got my keycard right here! Let's go.";
+            easyThought = "Now that I found a keycard, I can use it here.";
+            mediumThought = "Now that I have a keycard, it's time to swipe in.";
+            hardThought = "I've got a keycard right here! Let's go.";
         } 
     }
 

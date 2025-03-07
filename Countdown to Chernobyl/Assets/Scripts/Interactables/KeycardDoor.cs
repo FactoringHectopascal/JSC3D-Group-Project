@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Diagnostics;
+
 using UnityEngine;
 
 public class KeycardDoor : Door
@@ -16,12 +15,17 @@ public class KeycardDoor : Door
         PlayerIntTextHard = "I bet I could punch through this, but I'm saving my strength for the Kaiju I have to fight later.";
     }
 
-    private void Update()
+    public int stopAfterOne;
+
+    void OnTriggerStay(Collider other)
     {
-        condition = GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().keycardScanned;
-        if (condition)
-            GetComponent<Animator>().Play("DoorOpen");
-        if (!condition)
+        if(other.tag == "Player" && stopAfterOne < 1)
+        {
             GetComponent<Animator>().Play("DoorClose");
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().StartCoroutine(GameObject.FindGameObjectWithTag("Player").GetComponent<Interaction>().TypewriterEffect("What the hell!? The door just closed behind me! Crap! I gotta find a way out of here!"));
+            stopAfterOne++;
+        }
     }
+
+  
 }

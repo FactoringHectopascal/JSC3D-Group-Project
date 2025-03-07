@@ -1,14 +1,17 @@
 using StarterAssets;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
 
+
     // Use this for initialization
     void Start()
     {
         GetComponent<Canvas>().enabled = false;
+
     }
 
     // Update is called once per frame

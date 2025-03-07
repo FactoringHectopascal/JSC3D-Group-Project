@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class Locker : Object
@@ -22,10 +23,18 @@ public class Locker : Object
     {
 
         if(circlePuzzle && GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().rotationPuzzle)
+        {
+            playerIntTextEasy = "Nice! I got it open. Let's see what's inside.";
+            PlayerIntTextMedium = "Alright cool, time to see what's in here.";
+            PlayerIntTextHard = "Sick! I got it open! Now let's see what's in here.";
             locked = false;
+        }
 
         if(keyPuzzle &&  GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Grey Key"))
         {
+            playerIntTextEasy = "Ah cool! I got it! Now I can pitch this key.";
+            PlayerIntTextMedium = "Sweet! I found out where to use this key! Now I can toss it.";
+            PlayerIntTextHard = "Heck yeah! Let's see what's in here and get going.";
             Item _item = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GetItem("Grey Key");
             GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().RemoveItem(_item);
             locked = false;
@@ -45,6 +54,16 @@ public class Locker : Object
             }
         }
         
-        
+       
+    }
+
+    void Update()
+    {
+        if(keyPuzzle &&  GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().HasItem("Grey Key"))
+        {
+            playerIntTextEasy = "Nice! I got it open using the key. Now let's check what's in here.";
+                PlayerIntTextMedium = "Awesome, the key was perfect for that lock! Now I can pitch it. Let's see what's in here.";
+                PlayerIntTextHard = "Very cool, I got that locker open using the key that I smashed together. Let's see what's in her- oh yeah, I don't need this anymore.";
+        }
     }
 }

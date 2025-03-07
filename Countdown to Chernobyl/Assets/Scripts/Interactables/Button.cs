@@ -26,8 +26,13 @@ public class Button1 : Object
 
     public override void OnInteract()
     {
+        if(!GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screenClear)
+        {
         GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screen3 = true;
         GameObject.FindGameObjectWithTag("Event Handler").GetComponent<EventHandler>().screen1 = false;
+        }
+        else
+        isInteractableAgain = false;
         
         if (interactionCount > 1)
             repeatDialogue = false;

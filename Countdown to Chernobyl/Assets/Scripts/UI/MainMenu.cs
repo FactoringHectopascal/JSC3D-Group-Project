@@ -13,7 +13,23 @@ public class MainMenu : MonoBehaviour
     // Function to start the game when the button is clicked
     public void StartGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         SceneManager.LoadScene("Countdown To Chernobyl"); // Replace "GameLevel" with your actual game scene name
+    }
+
+    public void StartGameEasy()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        SceneManager.LoadScene("Countdown To Chernobyl 1");
+    }
+
+    public void StartGameHard()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        SceneManager.LoadScene("Countdown To Chernobyl 2");
     }
 
     // Function to quit the game when the button is clicked

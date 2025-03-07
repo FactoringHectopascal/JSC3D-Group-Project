@@ -39,12 +39,12 @@ public class EventHandler : MonoBehaviour
             isOpen = false;
         
 
-        if(rotationG > 3)
-            rotationG = 0;
-        if(rotationS > 3)
-            rotationS = 0;
-        if(rotationB > 3)
-            rotationB = 0;
+        if(rotationG > 4)
+            rotationG = 1;
+        if(rotationS > 4)
+            rotationS = 1;
+        if(rotationB > 4)
+            rotationB = 1;
 
             if(rotationG == 2 && rotationS == 2 && rotationB == 3)
                 rotationPuzzle = true;
