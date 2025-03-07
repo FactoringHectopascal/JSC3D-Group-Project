@@ -1,5 +1,7 @@
 This is the final build of the game.
 
+For replayability, I have added different difficulties. The player says something different depending on the difficulty, variety.
+
 P is quicksave, and to quickload is L.
 SOME SYSTEMS MAY HAVE TROUBLE QUICKLOADING, if this is the case please spam the L button until it works.
 
